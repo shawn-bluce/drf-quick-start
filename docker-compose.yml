@@ -24,7 +24,7 @@ services:
       - ./redis/data:/root/redis
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
     environment:
-      - REDIS_PASSWORD="CYi5!7bRvfk75s
+      - REDIS_PASSWORD="CYi5!7bRvfk75s"
       - REDIS_PORT=6379
       - REDIS_DATABASES=16
 
