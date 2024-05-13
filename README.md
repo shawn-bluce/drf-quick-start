@@ -7,3 +7,8 @@ This repository is a scaffold for Django and RESTapi.
 - Django REST framework
 - Django filter
 - MySQL 8
+
+# build docker image
+```shell
+docker build . -t <YOUR IMAGE NAME>
+```
