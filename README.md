@@ -12,3 +12,8 @@ This repository is a scaffold for Django and RESTapi.
 ```shell
 docker build . -t <YOUR IMAGE NAME>
 ```
+
+# deploy
+- **MUST MODIFY YOUR PASSWORD ON docker-compose.yml AND settings.py**
+- **MUST MODIFY YOUR PASSWORD ON docker-compose.yml AND settings.py**
+- **MUST MODIFY YOUR PASSWORD ON docker-compose.yml AND settings.py**
