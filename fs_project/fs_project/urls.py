@@ -37,12 +37,13 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # user about
-    path(r'api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path(r'api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path(r'^api/token/verify/$', TokenVerifyView.as_view(), name='token_verify'),
-
     path('account/', include('account.urls')),
+    path('ext_user/', include('ext_user.urls')),
+
+    # user about
+    path(r'token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path(r'token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path(r'token/verify/$', TokenVerifyView.as_view(), name='token_verify'),
 
     # swagger config
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
