@@ -4,19 +4,31 @@ from ext_user.models import ExtUser
 
 
 class ExtUserSerializer(serializers.HyperlinkedModelSerializer):
-    gender_cn = serializers.SerializerMethodField(read_only=True)
-    active_cn = serializers.SerializerMethodField(read_only=True)
-    joined_days = serializers.SerializerMethodField(read_only=True)
+    gender_cn = serializers.CharField(
+        source='get_gender_display',
+        read_only=True,
+    )
+    active_cn = serializers.CharField(
+        source='user.get_active_display',
+        read_only=True,
+    )
+    joined_days = serializers.SerializerMethodField(
+        read_only=True,
+    )
 
-    username = serializers.CharField(source='user.username', read_only=True)
-    active = serializers.BooleanField(source='user.is_active', read_only=True)
-    date_joined = serializers.DateTimeField(source='user.date_joined', format='%Y-%m-%d %H:%M:%S', read_only=True)
-
-    def get_gender_cn(self, obj):
-        return obj.get_gender_display()
-
-    def get_active_cn(self, obj):
-        return '正常' if obj.user.is_active else '冻结'
+    username = serializers.CharField(
+        source='user.username',
+        read_only=True,
+    )
+    active = serializers.BooleanField(
+        source='user.is_active',
+        read_only=True,
+    )
+    date_joined = serializers.DateTimeField(
+        source='user.date_joined',
+        format='%Y-%m-%d %H:%M:%S',
+        read_only=True,
+    )
 
     def get_joined_days(self, obj):
         today = date.today()
