@@ -6,11 +6,6 @@
 - MySQL 8.3
 - Redis
 
-# build docker image
-```shell
-docker build . -t <your_image_name>
-```
-
 # Development environment
 1. create a virtual environment, for example conda: `conda create -n <your_project_name> python=3.11`
 2. activate the virtual environment: `conda activate <your_project_name>`
