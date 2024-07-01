@@ -1,27 +1,23 @@
-version: '3.1'
-
 services:
-  web_server:
-    image: fs_project
-    restart: always
-    container_name: fs_project
-    volumes:
-      - .:/code
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
-    command: [ "python", "fs_project/manage.py", "runserver", "0.0.0.0:8000" ]
-    depends_on:
-      - mysql
-    links:
-      - mysql
+#  web_server:
+#    image: src
+#    restart: always
+#    volumes:
+#      - .:/code
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8000:8000"
+#    command: [ "python", "src/manage.py", "runserver", "0.0.0.0:8000" ]
+#    depends_on:
+#      - mysql
+#    links:
+#      - mysql
 
   mysql:
     image: mysql:8.3
     restart: always
-    container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: Admin123
       MYSQL_DATABASE: fs_project
@@ -31,4 +27,13 @@ services:
       - "3306:3306"
     volumes:
       - ./mysql_db:/var/lib/mysql
-    command: --default-authentication-plugin=mysql_native_password
+    command: --default-authentication-plugin=caching_sha2_password
+
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server
+    volumes:
+      - ./redis:/data

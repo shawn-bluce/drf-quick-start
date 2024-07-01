@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import logging
 from datetime import timedelta
 
 from pathlib import Path
@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-    'drf_yasg',
     'django_filters',
 
     'ext_user.apps.ExtUserConfig',
@@ -149,3 +148,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+try:
+    from .local_settings import *
+except ImportError:
+    logging.warning('==============================')
+    logging.warning('have no local_settings.py file')
+    logging.warning('==============================')

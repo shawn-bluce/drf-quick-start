@@ -1,5 +1,5 @@
 import django_filters
-from rest_framework import permissions, viewsets, status, mixins
+from rest_framework import permissions, viewsets
 
 from ext_user.models import ExtUser
 from ext_user.serializers import ExtUserSerializer
