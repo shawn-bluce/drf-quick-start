@@ -1,10 +1,18 @@
 import requests
 
+from loguru import logger
+from django.conf import settings
+
 
 def send_error_notification(message):
     """
 
     """
+
+    if not settings.IS_PROD:
+        logger.warning("Skipping error notification in non-production environment.")
+        return
+
     record = message['record']
 
     # get information from record
