@@ -1,19 +1,19 @@
 services:
-#  web_server:
-#    image: src
-#    restart: always
-#    volumes:
-#      - .:/code
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-#    ports:
-#      - "8000:8000"
-#    command: [ "python", "src/manage.py", "runserver", "0.0.0.0:8000" ]
-#    depends_on:
-#      - mysql
-#    links:
-#      - mysql
+  web_server:
+    image: src
+    restart: always
+    volumes:
+      - .:/code
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    command: [ "python", "src/manage.py", "runserver", "0.0.0.0:8000" ]
+    depends_on:
+      - mysql
+    links:
+      - mysql
 
   mysql:
     image: mysql:8.3

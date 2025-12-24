@@ -1,20 +1,19 @@
-FROM python:3.11
+FROM python:3.13-slim
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-ENV VIRTUAL_ENV=/venv
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        default-libmysqlclient-dev \
+        gcc \
+        libmariadb3 \
+        pkg-config \
+        curl \
+    && curl -LsSf https://astral.sh/uv/install.sh | sh \
+    && rm -rf /var/lib/apt/lists/*
 
-# Create virtual environment
-RUN python3 -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
-# Set work directory
 WORKDIR /code
+ENV PATH="/root/.local/bin:$PATH"
 
-ADD requirements_base.txt /requirements_base.txt
-ADD requirements_dev.txt /requirements_dev.txt
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-dev --no-install-project
 
-RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
-    pip install -r /requirements_dev.txt && \
-    rm -rf /requirements_*.txt
+COPY . .
