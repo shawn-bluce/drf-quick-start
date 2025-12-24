@@ -1,19 +1,40 @@
 services:
   web_server:
-    image: src
+    image: fs_project
     restart: always
-    volumes:
-      - .:/code
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
-    command: [ "python", "src/manage.py", "runserver", "0.0.0.0:8000" ]
+    command: [ "uv", "run", "python", "src/manage.py", "runserver", "0.0.0.0:8000" ]
     depends_on:
       - mysql
+      - redis
     links:
       - mysql
+      - redis
+
+  celery_worker:
+    image: fs_project
+    restart: always
+    command: ["uv", "run", "celery", "-A", "src.fs_project", "worker", "-l", "info" ]
+    depends_on:
+      - redis
+      - mysql
+    environment:
+      - PYTHONPATH=/code/fs_project/src
+      - DJANGO_SETTINGS_MODULE=fs_project.settings
+
+  celery_beat:
+    image: fs_project
+    restart: always
+    command: ["uv", "run", "celery", "-A", "src.fs_project", "beat", "-l", "info" ]
+    depends_on:
+      - redis
+    environment:
+      - PYTHONPATH=/code/fs_project/src
+      - DJANGO_SETTINGS_MODULE=fs_project.settings
 
   mysql:
     image: mysql:8.3
