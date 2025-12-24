@@ -22,5 +22,6 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "djangorestframework-stubs>=3.16.6",
     "drf-spectacular>=0.29.0",
 ]

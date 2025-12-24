@@ -13,10 +13,11 @@ from drf_spectacular.views import (
 )
 
 urlpatterns = [
+    path('common-check/', include('common_check.urls')),
     path('admin/', admin.site.urls),
 
     path('account/', include('account.urls')),
-    path('ext_user/', include('ext_user.urls')),
+    path('ext-user/', include('ext_user.urls')),
 
     # user about
     path(r'token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
