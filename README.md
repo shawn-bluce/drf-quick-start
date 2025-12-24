@@ -14,9 +14,10 @@
 5. install `uv` if you don't have it: `curl -LsSf https://astral.sh/uv/install.sh | sh`
 6. install dependencies: `uv install`
 7. create `src/fs_project/local_settings.py` and add your local settings (MySQL connection, Redis connection, etc.), this file will be ignored by git and imported in `settings.py`
-8. run `docker compose pull` to pull the MySQL and Redis images if you need
-9. create database in MySQL
-10. run `uv run python src/manage.py migrate` to create tables
-11. run `uv run python src/manage.py createsuperuser` to create a superuser
-12. run `uv run python src/manage.py runserver` to start the development server
-13. visit `http://127.0.0.1:8000/admin` to access the admin panel, `http://127.0.0.1:8000/api/schema/swagger-ui/` to access the Swagger UI, `http://127.0.0.1:8000/api/schema/redoc/` to access the Redoc UI
+8. copy `src/.env.example` to `src/.env` and modify the environment variables as needed
+9. run `docker compose pull` to pull the MySQL and Redis images if you need
+10. create database in MySQL
+11. run `uv run python src/manage.py migrate` to create tables
+12. run `uv run python src/manage.py createsuperuser` to create a superuser
+13. run `uv run python src/manage.py runserver` to start the development server
+14. visit `http://127.0.0.1:8000/admin` to access the admin panel, `http://127.0.0.1:8000/api/schema/swagger-ui/` to access the Swagger UI, `http://127.0.0.1:8000/api/schema/redoc/` to access the Redoc UI

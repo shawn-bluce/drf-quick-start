@@ -9,26 +9,38 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-import logging
+import os
 from datetime import timedelta
 
 from pathlib import Path
+import environ
+from loguru import logger
+
+from fs_project.logging_config import setup_logging
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+env = environ.Env(
+    DEBUG=(bool, False),
+    ALLOWED_HOSTS=(list, ['localhost', '127.0.0.1']),
+)
+env.read_env(os.path.join(BASE_DIR, '.env'))
+
+DEBUG = env('DEBUG')
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+ENVIRONMENT = env('RUN_ENV', default='dev')
+
+IS_DEV = ENVIRONMENT == 'dev'
+IS_TEST = ENVIRONMENT == 'test'
+IS_PROD = ENVIRONMENT == 'prod'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-f$g1t3kpd3sv99ehjl(a0p#b^#hbf2&nele#hc_fr4ykvtu4e@'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -151,10 +163,11 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+setup_logging()
 
 try:
     from .local_settings import *
 except ImportError:
-    logging.warning('==============================')
-    logging.warning('have no local_settings.py file')
-    logging.warning('==============================')
+    logger.warning('==============================')
+    logger.warning('have no local_settings.py file')
+    logger.warning('==============================')
