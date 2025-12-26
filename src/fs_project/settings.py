@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
 
     'ext_user.apps.ExtUserConfig',
+    'operation_log.apps.OperationLogConfig',
 ]
 
 MIDDLEWARE = [

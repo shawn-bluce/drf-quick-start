@@ -18,6 +18,7 @@ urlpatterns = [
 
     path('account/', include('account.urls')),
     path('ext-user/', include('ext_user.urls')),
+    path('operation-log/', include('operation_log.urls')),
 
     # user about
     path(r'token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
