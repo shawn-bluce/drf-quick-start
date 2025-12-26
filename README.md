@@ -1,12 +1,34 @@
-# Basic Tech Stack
-- Python
-- Django
-- Django REST framework
-- Django filter
-- MySQL
-- Redis
+# Django REST Framework Quick Start
 
-# Development environment
+A production-ready Django REST Framework boilerplate for building REST APIs quickly and efficiently.
+
+## Overview
+
+This project provides a comprehensive starting template for Django REST Framework applications with essential features and best practices pre-configured. It includes user management, operation logging, asynchronous task processing, and complete Docker deployment setup.
+
+## Key Features
+
+- **Extended User Management** - Enhanced user profiles with social media integration
+- **Operation Logging** - Automatic audit trails for all CRUD operations
+- **Account Management** - User registration, password reset, and account lock/unlock
+- **JWT Authentication** - Secure token-based authentication
+- **Asynchronous Tasks** - Celery integration for background job processing
+- **API Documentation** - Auto-generated Swagger UI and Redoc documentation
+- **Docker Support** - Complete containerization with MySQL and Redis
+- **Comprehensive Logging** - Structured logging with error notifications
+- **Health Check** - Built-in endpoint for service monitoring
+
+## Tech Stack
+
+- **Python 3.13**
+- **Django 6.0**
+- **Django REST Framework**
+- **MySQL** - Database
+- **Redis** - Caching and message broker
+- **Celery** - Asynchronous task queue
+- **Docker** - Container deployment
+
+## Development Environment
 1. clone the repository: `git clone https://github.com/shawn-bluce/drf-quick-start.git`
 2. delete the `.git` folder: `rm -rf .git`
 3. modify `drf-quick-start` to  your project name in `settings.py`、`wsgi.py`、`uv.lock`、`pyproject.toml` [Optional]
